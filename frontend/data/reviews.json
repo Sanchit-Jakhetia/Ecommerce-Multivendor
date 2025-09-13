@@ -1,0 +1,17 @@
+[
+  {
+    "_id": "rev001",
+    "productId": "689fc453a7a5f3532155e421",
+    "user": "Samiha Basak",
+    "rating": 4,
+    "comment": "Good product, but packaging could be better."
+  },
+  {
+    "_id": "rev002",
+    "productId": "689fc453a7a5f3532155e421",
+    "user": "Ayaan Khan",
+    "rating": 5,
+    "comment": "Loved it! Works exactly as described."
+  }
+]
+    

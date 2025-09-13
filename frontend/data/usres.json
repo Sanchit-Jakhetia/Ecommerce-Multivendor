@@ -1,0 +1,25 @@
+[
+  {
+    "_id": "689fcd2ca7a5f3532155e690",
+    "name": "Samiha Basak",
+    "email": "kavyasandhu@goda.com",
+    "role": "buyer",
+    "addresses": [
+      {
+        "label": "Other",
+        "line1": "186, Bumb Ganj",
+        "line2": "98",
+        "city": "Sagar",
+        "state": "Nagaland",
+        "postalCode": "361777",
+        "country": "India"
+      }
+    ],
+    "phoneNumbers": [
+      {
+        "label": "Mobile",
+        "number": "+91-9358180043"
+      }
+    ]
+  }
+]

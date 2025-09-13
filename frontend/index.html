@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+</head>
+<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen">
+
+  <!-- Header -->
+  <div id="header"></div>
+
+  <!-- Carousel -->
+  <section class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide">
+        <img src="https://dummyimage.com/1600x400/4c1d95/ffffff&text=Big+Sale+Today!" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://dummyimage.com/1600x400/2563eb/ffffff&text=New+Arrivals+🔥" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://dummyimage.com/1600x400/059669/ffffff&text=Up+to+50%25+Off" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
+      </div>
+    </div>
+    <div class="swiper-pagination"></div>
+  </section>
+
+  <!-- Filter Button (Mobile Only) -->
+  <div class="flex justify-end px-4 mt-4 md:hidden">
+    <button id="filter-btn" class="bg-yellow-400 text-black font-bold px-4 py-2 rounded-full">
+      Filters
+    </button>
+  </div>
+
+  <!-- Overlay for Drawer -->
+  <div id="filter-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+  <!-- Sidebar Drawer (Mobile) -->
+  <aside id="mobile-sidebar" class="
+    fixed top-0 left-0 w-64 h-full bg-gray-900 transform -translate-x-full 
+    transition-transform duration-300 z-50 p-4 space-y-6 overflow-y-auto">
+    <div class="flex justify-between items-center mb-4">
+      <h3 class="text-xl font-bold">Filters</h3>
+      <button id="close-sidebar" class="text-gray-400 text-2xl">&times;</button>
+    </div>
+    <div id="mobile-filter-content"></div>
+  </aside>
+
+  <!-- Main Layout -->
+  <main class="max-w-[1600px] mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6">
+
+    <!-- Sidebar Filters (Desktop Only) -->
+    <aside id="desktop-sidebar" class="bg-gray-800 rounded-xl p-4 space-y-6 h-fit md:sticky md:top-20 hidden md:block">
+      <h3 class="text-xl font-bold">Filters</h3>
+
+      <!-- Categories -->
+      <div>
+        <h4 class="font-semibold mb-2">Categories</h4>
+        <div id="category-filters" class="space-y-1"></div>
+      </div>
+
+      <!-- Price Range -->
+      <div>
+        <h4 class="font-semibold mb-2">Price Range</h4>
+        <input id="price-range" type="range" min="0" max="2000" step="50" class="w-full">
+        <p class="text-sm text-gray-400 mt-1">Max: ₹<span id="price-value">2000</span></p>
+      </div>
+
+      <!-- In Stock Toggle -->
+      <div class="flex items-center space-x-2">
+        <input type="checkbox" id="in-stock-toggle" class="h-4 w-4 text-yellow-400">
+        <label for="in-stock-toggle" class="text-sm">In Stock Only</label>
+      </div>
+    </aside>
+
+    <!-- Product Section -->
+    <section>
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-3xl font-bold">Products</h2>
+        <select id="sort-products" class="bg-gray-800 text-gray-200 px-3 py-2 rounded-md border border-gray-700">
+          <option value="default">Sort by</option>
+          <option value="price-low-high">Price: Low to High</option>
+          <option value="price-high-low">Price: High to Low</option>
+          <option value="rating-high-low">Rating: High to Low</option>
+        </select>
+      </div>
+
+      <!-- Product Grid -->
+      <section id="product-grid" class="
+        grid gap-6 
+        sm:grid-cols-2 
+        md:grid-cols-3 
+        lg:grid-cols-4 
+        2xl:grid-cols-5">
+      </section>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer"></div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+
+  <script>
+    // Sidebar Drawer Toggle
+    const filterBtn = document.getElementById('filter-btn');
+    const overlay = document.getElementById('filter-overlay');
+    const sidebar = document.getElementById('mobile-sidebar');
+    const closeSidebar = document.getElementById('close-sidebar');
+
+    filterBtn.addEventListener('click', () => {
+      sidebar.classList.remove('-translate-x-full');
+      overlay.classList.remove('hidden');
+    });
+
+    closeSidebar.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+
+    overlay.addEventListener('click', () => {
+      sidebar.classList.add('-translate-x-full');
+      overlay.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

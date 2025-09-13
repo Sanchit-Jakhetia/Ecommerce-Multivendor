@@ -1,0 +1,153 @@
+[
+  {
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e421"
+  },
+  "name": "Essence Mascara Lash Princess",
+  "description": "The Essence Mascara Lash Princess is a popular mascara known for its volumizing and lengthening effects. Achieve dramatic lashes with this long-lasting and cruelty-free formula.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/beauty/essence-mascara-lash-princess/1.webp"
+  ],
+  "price": 829,
+  "mrp": 1511,
+  "discount": 45.14,
+  "rating": 2.56,
+  "ratingTotal": 12,
+  "stock": 99,
+  "sellerId": "c256de7424a14c8bbb8ac300",
+  "categoryId": "3fa3be7bddd34deaaad99421",
+  "productUrl": "https://example.com/product/1",
+  "createdAt": "2024-09-06T23:28:29.262828",
+  "updatedAt": "2025-08-15T23:28:29.262919"
+},
+  {
+    "_id": {
+        "$oid": "689fc453a7a5f3532155e424"
+    },
+    "name": "Red Lipstick",
+    "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
+    "images": [
+        "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
+    ],
+    "price": 1078,
+    "mrp": 1649,
+    "discount": 34.63,
+    "rating": 4.36,
+    "ratingTotal": 14,
+    "stock": 91,
+    "sellerId": "4cc9207a2446429db095caeb",
+    "categoryId": "09150c7a65f541f1a76cacfa",
+    "productUrl": "https://example.com/product/4",
+    "createdAt": "2025-04-24T23:28:29.263023",
+    "updatedAt": "2025-08-15T23:28:29.263060"
+    },
+    {
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e43f"
+  },
+  "name": "Lemon",
+  "description": "Zesty and tangy lemons, versatile for cooking, baking, or making refreshing beverages.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/groceries/lemon/1.webp"
+  ],
+  "price": 65,
+  "mrp": 4007,
+  "discount": 98.38,
+  "rating": 3.53,
+  "ratingTotal": 15,
+  "stock": 31,
+  "sellerId": "a8b8dac200084ae1ac9f0ef7",
+  "categoryId": "7d16da64a4284065b101b9e4",
+  "productUrl": "https://example.com/product/31",
+  "createdAt": "2024-11-11T23:28:29.263627",
+  "updatedAt": "2025-08-15T23:28:29.263640"
+},
+{
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e459"
+  },
+  "name": "Fine Mesh Strainer",
+  "description": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/kitchen-accessories/fine-mesh-strainer/1.webp"
+  ],
+  "price": 829,
+  "mrp": 4447,
+  "discount": 81.36,
+  "rating": 3.04,
+  "ratingTotal": 11,
+  "stock": 85,
+  "sellerId": "bc7e9acb2d704523ab99c906",
+  "categoryId": "6e230d7390f04b1e8104295f",
+  "productUrl": "https://example.com/product/57",
+  "createdAt": "2025-07-24T23:28:29.264133",
+  "updatedAt": "2025-08-15T23:28:29.265347"
+},
+{
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e46f"
+  },
+  "name": "Asus Zenbook Pro Dual Screen Laptop",
+  "description": "The Asus Zenbook Pro Dual Screen Laptop is a high-performance device with dual screens, providing productivity and versatility for creative professionals.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/1.webp",
+    "https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/2.webp",
+    "https://cdn.dummyjson.com/product-images/laptops/asus-zenbook-pro-dual-screen-laptop/3.webp"
+  ],
+  "price": 149399,
+  "mrp": 151734,
+  "discount": 1.54,
+  "rating": 3.95,
+  "ratingTotal": 13,
+  "stock": 45,
+  "sellerId": "c23a60d5222d400aa42bee15",
+  "categoryId": "1478abacfb22479baa3e2fcd",
+  "productUrl": "https://example.com/product/79",
+  "createdAt": "2024-09-14T23:28:29.266474",
+  "updatedAt": "2025-08-15T23:28:29.266489"
+},
+{
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e459"
+  },
+  "name": "Fine Mesh Strainer",
+  "description": "The Fine Mesh Strainer is a versatile tool for straining liquids and sifting dry ingredients. Its fine mesh ensures efficient filtering for smooth cooking and baking.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/kitchen-accessories/fine-mesh-strainer/1.webp"
+  ],
+  "price": 829,
+  "mrp": 4447,
+  "discount": 81.36,
+  "rating": 3.04,
+  "ratingTotal": 11,
+  "stock": 85,
+  "sellerId": "bc7e9acb2d704523ab99c906",
+  "categoryId": "6e230d7390f04b1e8104295f",
+  "productUrl": "https://example.com/product/57",
+  "createdAt": "2025-07-24T23:28:29.264133",
+  "updatedAt": "2025-08-15T23:28:29.265347"
+},
+{
+  "_id": {
+    "$oid": "689fc453a7a5f3532155e424"
+  },
+  "name": "Red Lipstick",
+  "description": "The Red Lipstick is a classic and bold choice for adding a pop of color to your lips. With a creamy and pigmented formula, it provides a vibrant and long-lasting finish.",
+  "images": [
+    "https://cdn.dummyjson.com/product-images/beauty/red-lipstick/1.webp"
+  ],
+  "price": 1078,
+  "mrp": 1649,
+  "discount": 34.63,
+  "rating": 4.36,
+  "ratingTotal": 14,
+  "stock": 91,
+  "sellerId": "4cc9207a2446429db095caeb",
+  "categoryId": "09150c7a65f541f1a76cacfa",
+  "productUrl": "https://example.com/product/4",
+  "createdAt": "2025-04-24T23:28:29.263023",
+  "updatedAt": "2025-08-15T23:28:29.263060"
+}
+]
+
+
