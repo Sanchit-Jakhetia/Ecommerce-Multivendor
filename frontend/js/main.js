@@ -4,6 +4,8 @@ let selectedCategories = new Set();
 let maxPrice = 2000;
 let inStockOnly = false;
 
+const API_BASE_URL = "http://localhost:5000";
+
 async function loadComponent(id, file) {
   const res = await fetch(file);
   document.getElementById(id).innerHTML = await res.text();
@@ -17,17 +19,31 @@ loadComponent("header", "components/header.html").then(() => {
 loadComponent("footer", "components/footer.html");
 
 async function loadProducts() {
-  const productRes = await fetch("data/products.json");
-  products = await productRes.json();
+  try {
+    // ✅ Fetch products from backend
+    const productRes = await fetch(`${API_BASE_URL}/api/products`);
+    products = await productRes.json();
 
-  const categoryRes = await fetch("data/categories.json");
-  categories = await categoryRes.json();
+    // ✅ Optional: fetch categories from backend (if API exists)
+    try {
+      const categoryRes = await fetch(`${API_BASE_URL}/api/categories`);
+      categories = await categoryRes.json();
+    } catch {
+      console.warn("No category API found, skipping category filters.");
+    }
 
-  populateCategoryFilters();
-  renderProducts(products);
+    populateCategoryFilters();
+    renderProducts(products);
+  } catch (error) {
+    console.error("Error loading products:", error);
+    document.getElementById("product-grid").innerHTML =
+      `<p class="text-red-400 text-center">Failed to load products.</p>`;
+  }
 }
 
 function populateCategoryFilters() {
+  if (!categories.length) return;
+
   const container = document.getElementById("category-filters");
   container.innerHTML = categories.map(cat => `
     <div>
@@ -47,11 +63,16 @@ function populateCategoryFilters() {
 
 function renderProducts(productList) {
   const grid = document.getElementById("product-grid");
+  if (!productList.length) {
+    grid.innerHTML = `<p class="text-gray-400 text-center col-span-full">No products found.</p>`;
+    return;
+  }
+
   grid.innerHTML = productList.map(product => {
     const categoryName = categories.find(c => c._id === product.categoryId)?.name || "Uncategorized";
     return `
       <div class="bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer product-card" 
-           data-id="${product._id.$oid}">
+           data-id="${product._id}">
         <img src="${product.images[0]}" class="rounded-t-2xl w-full h-56 object-cover" />
         <div class="p-5">
           <h2 class="text-lg font-bold mb-1">${product.name}</h2>
@@ -66,7 +87,7 @@ function renderProducts(productList) {
     `;
   }).join("");
 
-  // Add click listeners
+  // ✅ Click listeners for navigation
   document.querySelectorAll(".product-card").forEach(card => {
     card.addEventListener("click", () => {
       const id = card.dataset.id;
@@ -74,7 +95,6 @@ function renderProducts(productList) {
     });
   });
 }
-
 
 function applyFilters() {
   let filtered = products.filter(p =>
