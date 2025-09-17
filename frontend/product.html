@@ -6,21 +6,35 @@
   <title>Product Details</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen">
 
-  <!-- Header -->
-  <div id="header"></div>
+<body class="bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 text-gray-900 min-h-screen" style="zoom: 0.8;">
+
+
+  <!-- Header (Loaded via JS) -->
+  <div id="header-container"></div>
+
 
   <!-- Product Container -->
-  <main id="product-details" class="max-w-6xl mx-auto px-4 py-10">
+  <main id="product-details" class="w-full max-w-5xl mx-auto px-8 py-10">
     <!-- JS will inject product details here -->
   </main>
 
-  <!-- Footer -->
-  <div id="footer"></div>
+
+  <!-- Footer (Loaded via JS) -->
+  <div id="footer-container"></div>
+
 
   <script src="js/product.js"></script>
   <script src="js/auth.js"></script>
+  <script>
+    // Dynamically load header and footer
+    async function loadComponent(id, url) {
+      const res = await fetch(url);
+      document.getElementById(id).innerHTML = await res.text();
+    }
+    loadComponent('header-container', 'components/header.html');
+    loadComponent('footer-container', 'components/footer.html');
+  </script>
 
 </body>
 </html>

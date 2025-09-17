@@ -26,8 +26,9 @@ async function loadProducts() {
 
     // ✅ Optional: fetch categories from backend (if API exists)
     try {
-      const categoryRes = await fetch(`${API_BASE_URL}/api/categories`);
+      const categoryRes = await fetch("http://localhost:5000/api/categories");
       categories = await categoryRes.json();
+
     } catch {
       console.warn("No category API found, skipping category filters.");
     }
@@ -71,7 +72,7 @@ function renderProducts(productList) {
   grid.innerHTML = productList.map(product => {
     const categoryName = categories.find(c => c._id === product.categoryId)?.name || "Uncategorized";
     return `
-      <div class="bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition transform hover:-translate-y-1 cursor-pointer product-card" 
+  <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer product-card" 
            data-id="${product._id}">
         <img src="${product.images[0]}" class="rounded-t-2xl w-full h-56 object-cover" />
         <div class="p-5">

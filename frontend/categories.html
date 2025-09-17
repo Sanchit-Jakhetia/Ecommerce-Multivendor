@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Categories</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 text-gray-900 min-h-screen">
+  <!-- Header -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-[1600px] mx-auto flex items-center justify-between px-4 py-4">
+      <div class="flex items-center gap-2">
+        <img src="assets/logo.png" alt="Logo" class="h-10 w-10 rounded-full border border-gray-200 bg-gray-100" onerror="this.style.display='none'">
+        <span class="text-2xl font-bold text-yellow-500">MultiVendor</span>
+      </div>
+      <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
+        <a href="index.html" class="hover:text-yellow-500">Home</a>
+        <a href="categories.html" class="hover:text-yellow-500">Categories</a>
+        <a href="cart.html" class="hover:text-yellow-500">Cart</a>
+        <a href="login.html" class="hover:text-yellow-500">Login</a>
+        <a href="signup.html" class="hover:text-yellow-500">Sign Up</a>
+      </nav>
+      <div class="md:hidden">
+        <button id="mobile-menu-btn" class="text-2xl text-gray-700 focus:outline-none">&#9776;</button>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Hero/Sponsor Swiper Section -->
+  <section class="w-full py-8 mb-8">
+    <div class="swiper heroSwiper max-w-6xl mx-auto rounded-2xl overflow-hidden shadow-lg">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide bg-gradient-to-r from-yellow-100 via-white to-yellow-50 flex items-center justify-between px-8 py-10 gap-8">
+          <div>
+            <h2 class="text-4xl font-extrabold text-yellow-500 mb-2">Mega Electronics Sale</h2>
+            <p class="text-lg text-gray-700 mb-4">Up to 60% off on top gadgets and accessories!</p>
+            <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-6 py-2 rounded-full shadow transition">Shop Electronics</a>
+          </div>
+          <img src="https://dummyimage.com/350x200/ffe066/333&text=Electronics" class="rounded-xl w-72 h-44 object-cover" alt="Electronics">
+        </div>
+        <div class="swiper-slide bg-gradient-to-r from-yellow-50 via-white to-yellow-100 flex items-center justify-between px-8 py-10 gap-8">
+          <div>
+            <h2 class="text-4xl font-extrabold text-yellow-500 mb-2">Fashion Fiesta</h2>
+            <p class="text-lg text-gray-700 mb-4">Trendy styles for everyone. Flat 40% off!</p>
+            <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-6 py-2 rounded-full shadow transition">Shop Fashion</a>
+          </div>
+          <img src="https://dummyimage.com/350x200/ffd6e0/333&text=Fashion" class="rounded-xl w-72 h-44 object-cover" alt="Fashion">
+        </div>
+        <div class="swiper-slide bg-gradient-to-r from-yellow-100 via-white to-yellow-50 flex items-center justify-between px-8 py-10 gap-8">
+          <div>
+            <h2 class="text-4xl font-extrabold text-yellow-500 mb-2">Home Essentials</h2>
+            <p class="text-lg text-gray-700 mb-4">Upgrade your home with the best deals!</p>
+            <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-6 py-2 rounded-full shadow transition">Shop Home</a>
+          </div>
+          <img src="https://dummyimage.com/350x200/ccf2ff/333&text=Home+Essentials" class="rounded-xl w-72 h-44 object-cover" alt="Home Essentials">
+        </div>
+        <div class="swiper-slide bg-gradient-to-r from-yellow-50 via-white to-yellow-100 flex items-center justify-between px-8 py-10 gap-8">
+          <div>
+            <h2 class="text-4xl font-extrabold text-yellow-500 mb-2">Sports & Fitness</h2>
+            <p class="text-lg text-gray-700 mb-4">Gear up for less. Save up to 50%!</p>
+            <a href="#" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-6 py-2 rounded-full shadow transition">Shop Sports</a>
+          </div>
+          <img src="https://dummyimage.com/350x200/ffe066/333&text=Sports+%26+Fitness" class="rounded-xl w-72 h-44 object-cover" alt="Sports & Fitness">
+        </div>
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </section>
+
+  <!-- Category Slider -->
+  <section class="my-10">
+    <h2 class="text-3xl font-extrabold mb-6 text-center text-yellow-500 tracking-wide">
+      Shop by Category
+    </h2>
+    <div class="swiper mySwiper px-8">
+      <div class="swiper-wrapper" id="category-slider"></div>
+      <div class="swiper-pagination mt-4"></div>
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section class="my-10 max-w-7xl mx-auto px-6">
+    <h2 class="text-2xl font-bold mb-6 text-yellow-500" id="selected-category-title">
+      Select a Category
+    </h2>
+    <div id="product-grid" 
+         class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="bg-white border-t border-gray-200 mt-10">
+    <div class="max-w-[1600px] mx-auto px-4 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-bold text-yellow-500">MultiVendor</span>
+        <span class="text-gray-400">&copy; 2025</span>
+      </div>
+      <div class="flex gap-4 text-gray-500">
+        <a href="#" class="hover:text-yellow-500">Privacy Policy</a>
+        <a href="#" class="hover:text-yellow-500">Terms</a>
+        <a href="#" class="hover:text-yellow-500">Contact</a>
+      </div>
+    </div>
+  </footer>
+  <script src="js/categories.js"></script>
+  <script>
+    // Hero Swiper
+    new Swiper('.heroSwiper', {
+      loop: true,
+      autoplay: { delay: 3500, disableOnInteraction: false },
+      pagination: { el: '.heroSwiper .swiper-pagination', clickable: true },
+      effect: 'slide',
+    });
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const nav = document.querySelector('header nav');
+    mobileMenuBtn.addEventListener('click', () => {
+      nav.classList.toggle('hidden');
+      nav.classList.toggle('flex');
+      nav.classList.toggle('flex-col');
+      nav.classList.toggle('absolute');
+      nav.classList.toggle('top-16');
+      nav.classList.toggle('right-4');
+      nav.classList.toggle('bg-white');
+      nav.classList.toggle('shadow-lg');
+      nav.classList.toggle('rounded-xl');
+      nav.classList.toggle('p-4');
+    });
+  </script>
+</body>
+</html>

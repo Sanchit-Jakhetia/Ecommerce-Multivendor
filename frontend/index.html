@@ -7,80 +7,68 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 </head>
-<body class="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 text-gray-100 min-h-screen">
+<body class="bg-gradient-to-b from-gray-100 via-gray-50 to-gray-100 text-gray-900 min-h-screen" style="zoom: 0.8;">
 
-  <!-- Header -->
-  <div id="header"></div>
 
-  <!-- Carousel -->
-  <section class="swiper mySwiper">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <img src="https://dummyimage.com/1600x400/4c1d95/ffffff&text=Big+Sale+Today!" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
-      </div>
-      <div class="swiper-slide">
-        <img src="https://dummyimage.com/1600x400/2563eb/ffffff&text=New+Arrivals+🔥" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
-      </div>
-      <div class="swiper-slide">
-        <img src="https://dummyimage.com/1600x400/059669/ffffff&text=Up+to+50%25+Off" class="w-full h-48 sm:h-64 md:h-80 xl:h-96 object-cover rounded-lg" />
-      </div>
-    </div>
-    <div class="swiper-pagination"></div>
-  </section>
+  <!-- Header (Loaded via JS) -->
+  <div id="header-container"></div>
+
+  <!-- Hero Section (Loaded via JS) -->
+  <div id="hero-container" style="margin-bottom:0.5rem;"></div>
 
   <!-- Filter Button (Mobile Only) -->
   <div class="flex justify-end px-4 mt-4 md:hidden">
-    <button id="filter-btn" class="bg-yellow-400 text-black font-bold px-4 py-2 rounded-full">
+    <button id="filter-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-4 py-2 rounded-full shadow">
       Filters
     </button>
   </div>
 
   <!-- Overlay for Drawer -->
-  <div id="filter-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+  <div id="filter-overlay" class="fixed inset-0 bg-black bg-opacity-30 hidden z-40"></div>
 
   <!-- Sidebar Drawer (Mobile) -->
   <aside id="mobile-sidebar" class="
-    fixed top-0 left-0 w-64 h-full bg-gray-900 transform -translate-x-full 
+    fixed top-0 left-0 w-64 h-full bg-white border-r border-gray-200 transform -translate-x-full 
     transition-transform duration-300 z-50 p-4 space-y-6 overflow-y-auto">
     <div class="flex justify-between items-center mb-4">
-      <h3 class="text-xl font-bold">Filters</h3>
+      <h3 class="text-xl font-bold text-gray-900">Filters</h3>
       <button id="close-sidebar" class="text-gray-400 text-2xl">&times;</button>
     </div>
     <div id="mobile-filter-content"></div>
   </aside>
 
   <!-- Main Layout -->
-  <main class="max-w-[1600px] mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-[250px_1fr] gap-6">
+  <main class="w-full px-8 py-1 grid grid-cols-1 md:grid-cols-[250px_1fr] gap-8">
 
     <!-- Sidebar Filters (Desktop Only) -->
-    <aside id="desktop-sidebar" class="bg-gray-800 rounded-xl p-4 space-y-6 h-fit md:sticky md:top-20 hidden md:block">
-      <h3 class="text-xl font-bold">Filters</h3>
+    <aside id="desktop-sidebar" class="bg-white border border-gray-200 rounded-xl p-4 space-y-6 h-fit md:sticky md:top-20 hidden md:block">
+      <h3 class="text-xl font-bold text-gray-900">Filters</h3>
 
       <!-- Categories -->
       <div>
-        <h4 class="font-semibold mb-2">Categories</h4>
+  <h4 class="font-semibold mb-2 text-gray-700">Categories</h4>
         <div id="category-filters" class="space-y-1"></div>
       </div>
 
       <!-- Price Range -->
       <div>
-        <h4 class="font-semibold mb-2">Price Range</h4>
-        <input id="price-range" type="range" min="0" max="2000" step="50" class="w-full">
-        <p class="text-sm text-gray-400 mt-1">Max: ₹<span id="price-value">2000</span></p>
+  <h4 class="font-semibold mb-2 text-gray-700">Price Range</h4>
+        <input id="price-range" type="range" min="0" max="400000" step="500" class="w-full">
+  <p class="text-sm text-gray-500 mt-1">Max: ₹<span id="price-value">4,00,000</span></p>
       </div>
 
       <!-- In Stock Toggle -->
       <div class="flex items-center space-x-2">
         <input type="checkbox" id="in-stock-toggle" class="h-4 w-4 text-yellow-400">
-        <label for="in-stock-toggle" class="text-sm">In Stock Only</label>
+        <label for="in-stock-toggle" class="text-sm text-gray-700">In Stock Only</label>
       </div>
     </aside>
 
     <!-- Product Section -->
     <section>
       <div class="flex justify-between items-center mb-6">
-        <h2 class="text-3xl font-bold">Products</h2>
-        <select id="sort-products" class="bg-gray-800 text-gray-200 px-3 py-2 rounded-md border border-gray-700">
+        <h2 class="text-3xl font-bold text-gray-900">Products</h2>
+        <select id="sort-products" class="bg-white text-gray-700 px-3 py-2 rounded-md border border-gray-300 shadow-sm">
           <option value="default">Sort by</option>
           <option value="price-low-high">Price: Low to High</option>
           <option value="price-high-low">Price: High to Low</option>
@@ -90,40 +78,88 @@
 
       <!-- Product Grid -->
       <section id="product-grid" class="
-        grid gap-6 
-        sm:grid-cols-2 
-        md:grid-cols-3 
-        lg:grid-cols-4 
-        2xl:grid-cols-5">
+        grid gap-6
+        grid-cols-2
+        sm:grid-cols-3
+        md:grid-cols-4
+        lg:grid-cols-5
+        xl:grid-cols-6
+        2xl:grid-cols-6
+        ">
+        <!-- Product cards will be injected here -->
       </section>
     </section>
   </main>
 
+
   <!-- Footer -->
-  <div id="footer"></div>
+  <footer class="bg-white border-t border-gray-200 mt-10">
+    <div class="w-full px-8 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <span class="text-xl font-bold text-yellow-500">MultiVendor</span>
+        <span class="text-gray-400">&copy; 2025</span>
+      </div>
+      <div class="flex gap-4 text-gray-500">
+        <a href="#" class="hover:text-yellow-500">Privacy Policy</a>
+        <a href="#" class="hover:text-yellow-500">Terms</a>
+        <a href="#" class="hover:text-yellow-500">Contact</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
   <script src="js/main.js"></script>
   <script src="js/auth.js"></script>
-
   <script>
+    // Dynamically load header and hero components
+    async function loadComponent(id, url, callback) {
+      const res = await fetch(url);
+      const html = await res.text();
+      document.getElementById(id).innerHTML = html;
+      if (callback) callback();
+    }
+    loadComponent('header-container', 'components/header.html', () => {
+      // Mobile menu toggle for header
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const nav = document.querySelector('#header-container nav');
+      if (mobileMenuBtn && nav) {
+        mobileMenuBtn.addEventListener('click', () => {
+          nav.classList.toggle('hidden');
+          nav.classList.toggle('flex');
+          nav.classList.toggle('flex-col');
+          nav.classList.toggle('absolute');
+          nav.classList.toggle('top-16');
+          nav.classList.toggle('right-4');
+          nav.classList.toggle('bg-white');
+          nav.classList.toggle('shadow-lg');
+          nav.classList.toggle('rounded-xl');
+          nav.classList.toggle('p-4');
+        });
+      }
+    });
+    loadComponent('hero-container', 'components/hero.html', () => {
+      // Hero Swiper
+      new Swiper('.heroSwiper', {
+        loop: true,
+        autoplay: { delay: 3500, disableOnInteraction: false },
+        pagination: { el: '.heroSwiper .swiper-pagination', clickable: true },
+        effect: 'slide',
+      });
+    });
     // Sidebar Drawer Toggle
     const filterBtn = document.getElementById('filter-btn');
     const overlay = document.getElementById('filter-overlay');
     const sidebar = document.getElementById('mobile-sidebar');
     const closeSidebar = document.getElementById('close-sidebar');
-
     filterBtn.addEventListener('click', () => {
       sidebar.classList.remove('-translate-x-full');
       overlay.classList.remove('hidden');
     });
-
     closeSidebar.addEventListener('click', () => {
       sidebar.classList.add('-translate-x-full');
       overlay.classList.add('hidden');
     });
-
     overlay.addEventListener('click', () => {
       sidebar.classList.add('-translate-x-full');
       overlay.classList.add('hidden');
