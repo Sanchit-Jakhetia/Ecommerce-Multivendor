@@ -117,8 +117,12 @@ if (loginForm) {
         });
         localStorage.removeItem("cart");
       }
-      // Redirect to main page
-      window.location.href = "index.html";
+      // Redirect based on user role
+      if (user.role === "seller") {
+        window.location.href = "seller-dashboard.html";
+      } else {
+        window.location.href = "index.html";
+      }
     } catch (err) {
       if (errorDiv) {
         errorDiv.textContent = "Login failed. Please try again.";

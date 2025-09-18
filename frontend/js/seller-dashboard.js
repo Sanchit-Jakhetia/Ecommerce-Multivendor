@@ -79,15 +79,25 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       const prodTbody = document.getElementById('seller-products-tbody');
       if (prodTbody) {
-        prodTbody.innerHTML = sellerProducts.map(p => `
+        prodTbody.innerHTML = sellerProducts.map((p, idx) => `
           <tr>
             <td class="py-2 px-4"><img src="${(p.images && p.images[0]) || ''}" alt="${p.name}" class="h-12 w-12 object-cover rounded" /></td>
             <td class="py-2 px-4 font-bold">${p.name}</td>
             <td class="py-2 px-4 text-green-700 font-bold">₹${p.price}</td>
             <td class="py-2 px-4">${p.stock}</td>
             <td class="py-2 px-4 text-yellow-500">${p.rating}</td>
+            <td class="py-2 px-4">
+              <button class="edit-product-btn bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded text-xs" data-idx="${idx}">Edit</button>
+            </td>
           </tr>
         `).join('');
+        // Attach edit button listeners
+        document.querySelectorAll('.edit-product-btn').forEach(btn => {
+          btn.addEventListener('click', e => {
+            const idx = btn.getAttribute('data-idx');
+            openProductModal(sellerProducts[idx]);
+          });
+        });
       }
 
       // Calculate stats
