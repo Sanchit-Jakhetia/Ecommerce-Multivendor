@@ -3,6 +3,9 @@ let categories = [];
 let selectedCategories = new Set();
 let maxPrice = 2000;
 let inStockOnly = false;
+let productsPerPage = 60;
+let currentPage = 1;
+let lastRenderedList = [];
 
 const API_BASE_URL = "http://localhost:5000";
 
@@ -34,7 +37,7 @@ async function loadProducts() {
     }
 
     populateCategoryFilters();
-    renderProducts(products);
+  renderProducts(products, true);
   } catch (error) {
     console.error("Error loading products:", error);
     document.getElementById("product-grid").innerHTML =
@@ -62,19 +65,26 @@ function populateCategoryFilters() {
   });
 }
 
-function renderProducts(productList) {
+function renderProducts(productList, resetPage = false) {
   const grid = document.getElementById("product-grid");
+  if (resetPage) {
+    currentPage = 1;
+  }
+  lastRenderedList = productList;
   if (!productList.length) {
     grid.innerHTML = `<p class="text-gray-400 text-center col-span-full">No products found.</p>`;
+    document.getElementById("load-more-container")?.remove();
     return;
   }
-
-  grid.innerHTML = productList.map(product => {
+  const start = 0;
+  const end = productsPerPage * currentPage;
+  const visibleProducts = productList.slice(start, end);
+  grid.innerHTML = visibleProducts.map(product => {
     const categoryName = categories.find(c => c._id === product.categoryId)?.name || "Uncategorized";
     return `
-  <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer product-card" 
+      <div class="bg-white border border-gray-200 rounded-2xl shadow hover:shadow-lg transition transform hover:-translate-y-1 cursor-pointer product-card" 
            data-id="${product._id}">
-        <img src="${product.images[0]}" class="rounded-t-2xl w-full h-56 object-cover" />
+        <img src="${product.images[0]}" class="rounded-t-2xl w-full h-56 object-cover" loading="lazy" />
         <div class="p-5">
           <h2 class="text-lg font-bold mb-1">${product.name}</h2>
           <p class="text-xs text-gray-400 italic mb-1">Category: ${categoryName}</p>
@@ -95,6 +105,20 @@ function renderProducts(productList) {
       window.location.href = `product.html?id=${id}`;
     });
   });
+
+  // Add Load More button if there are more products
+  document.getElementById("load-more-container")?.remove();
+  if (end < productList.length) {
+    const loadMoreDiv = document.createElement("div");
+    loadMoreDiv.id = "load-more-container";
+    loadMoreDiv.className = "flex justify-center my-8 col-span-full";
+    loadMoreDiv.innerHTML = `<button id="load-more-btn" class="bg-yellow-400 hover:bg-yellow-500 text-white font-bold px-6 py-3 rounded-full shadow-lg transition">Load More</button>`;
+    grid.parentNode.appendChild(loadMoreDiv);
+    document.getElementById("load-more-btn").onclick = () => {
+      currentPage++;
+      renderProducts(lastRenderedList);
+    };
+  }
 }
 
 function applyFilters() {
@@ -103,7 +127,7 @@ function applyFilters() {
     p.price <= maxPrice &&
     (!inStockOnly || p.stock > 0)
   );
-  renderProducts(filtered);
+  renderProducts(filtered, true);
 }
 
 // Event Listeners
@@ -123,7 +147,7 @@ document.getElementById("sort-products").addEventListener("change", (e) => {
   if (e.target.value === "price-low-high") sorted.sort((a, b) => a.price - b.price);
   else if (e.target.value === "price-high-low") sorted.sort((a, b) => b.price - a.price);
   else if (e.target.value === "rating-high-low") sorted.sort((a, b) => b.rating - a.rating);
-  renderProducts(sorted);
+  renderProducts(sorted, true);
 });
 
 loadProducts();

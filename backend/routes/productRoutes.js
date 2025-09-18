@@ -23,11 +23,18 @@ router.get("/", async (req, res) => {
 
 // @desc Get single product by ID
 // @route GET /api/products/:id
+import User from "../models/User.js";
+
+// Get single product by ID, with seller name
 router.get("/:id", async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const product = await Product.findById(req.params.id).lean();
     if (!product) return res.status(404).json({ message: "Product not found" });
-    res.json(product);
+    let seller = null;
+    if (product.sellerId) {
+      seller = await User.findById(product.sellerId, "name");
+    }
+    res.json({ ...product, seller: seller ? { _id: seller._id, name: seller.name } : null });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch product", error: error.message });
   }

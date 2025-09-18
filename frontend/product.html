@@ -15,7 +15,7 @@
 
 
   <!-- Product Container -->
-  <main id="product-details" class="w-full max-w-5xl mx-auto px-8 py-10">
+  <main id="product-details" class="w-full max-w-7xl mx-auto px-4 py-10">
     <!-- JS will inject product details here -->
   </main>
 
@@ -28,11 +28,14 @@
   <script src="js/auth.js"></script>
   <script>
     // Dynamically load header and footer
-    async function loadComponent(id, url) {
+    async function loadComponent(id, url, callback) {
       const res = await fetch(url);
       document.getElementById(id).innerHTML = await res.text();
+      if (callback) callback();
     }
-    loadComponent('header-container', 'components/header.html');
+    loadComponent('header-container', 'components/header.html', () => {
+      if (typeof updateHeader === 'function') updateHeader();
+    });
     loadComponent('footer-container', 'components/footer.html');
   </script>
 

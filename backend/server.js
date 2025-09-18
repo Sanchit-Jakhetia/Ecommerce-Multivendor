@@ -2,8 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import cors from "cors";
+
+
 import productRoutes from "./routes/productRoutes.js"; // ✅ Import routes
 import categoryRoutes from "./routes/categoryRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
+import cartRoutes from "./routes/cartRoutes.js";
+import sellerRoutes from "./routes/sellerRoutes.js";
+import ordersSellerRoutes from "./routes/ordersSellerRoutes.js";
 
 dotenv.config();
 
@@ -13,8 +20,16 @@ app.use(express.json());
 app.use(cors());
 
 // ✅ API routes
+
+
+
 app.use("/api/products", productRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use("/api/cart", cartRoutes);
+app.use("/api/sellers", sellerRoutes);
+app.use("/api/orders", ordersSellerRoutes);
 
 app.get("/", (req, res) => {
   res.json({ message: "API is running 🚀" });

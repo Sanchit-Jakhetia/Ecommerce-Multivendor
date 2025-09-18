@@ -1,127 +1,63 @@
-// ✅ Load components dynamically
-async function loadComponent(id, file) {
-  const res = await fetch(file);
-  document.getElementById(id).innerHTML = await res.text();
-}
+// cart.js
+// This script handles displaying the cart for the current user
 
-// ✅ Load header first, then show cart or login prompt
-loadComponent("header", "components/header.html").then(() => {
-  if (typeof updateHeader === "function") updateHeader(); // 🔑 make sure header updates
-  updateCartCount();
-  showCart();
-});
-
-loadComponent("footer", "components/footer.html");
-
-// ✅ Show login prompt or cart content
-function showCart() {
-  const container = document.getElementById("cart-container");
-  if (!container) return; // prevent errors if ID missing
-
-  const user = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (!user) {
-    container.innerHTML = `
-      <div class="bg-gray-800 p-6 rounded-lg text-center">
-        <h2 class="text-2xl font-bold mb-4">Please Login</h2>
-        <p class="mb-6 text-gray-400">You must be logged in to view your cart.</p>
-        <a href="login.html" class="bg-yellow-400 text-black px-4 py-2 rounded-lg font-bold hover:bg-yellow-300">
-          Go to Login
-        </a>
-      </div>
-    `;
-    return;
-  }
-
-  loadCart(); // only load cart if logged in
-}
-
-// ✅ Update cart badge in header
-function updateCartCount() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const totalQty = cart.reduce((acc, item) => acc + item.quantity, 0);
-  const badge = document.getElementById("cart-count");
-  if (!badge) return;
-
-  if (totalQty > 0) {
-    badge.innerText = totalQty;
-    badge.classList.remove("hidden");
-  } else {
-    badge.classList.add("hidden");
-  }
-}
-
-// ✅ Load and render cart items
-function loadCart() {
-  const cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const container = document.getElementById("cart-container");
-  if (!container) return;
-
-  if (cart.length === 0) {
-    container.innerHTML = `<p class="text-gray-400">Your cart is empty.</p>`;
-    return;
-  }
-
-  let total = 0;
-  container.innerHTML = cart.map(item => {
-    total += item.price * item.quantity;
-    return `
-      <div class="bg-gray-800 p-4 mb-4 rounded-lg flex justify-between items-center">
-        <div class="flex items-center space-x-4">
-          <img src="${item.images[0]}" class="w-20 h-20 object-cover rounded-lg">
-          <div>
-            <h2 class="text-lg font-bold">${item.name}</h2>
-            <p class="text-green-400">₹${item.price}</p>
-            <div class="flex items-center mt-2 space-x-2">
-              <button class="bg-gray-700 px-2 rounded text-xl" onclick="changeQty('${item._id.$oid}', -1)">-</button>
-              <span>${item.quantity}</span>
-              <button class="bg-gray-700 px-2 rounded text-xl" onclick="changeQty('${item._id.$oid}', 1)">+</button>
-            </div>
-          </div>
-        </div>
-        <button class="text-red-500 hover:underline" onclick="removeItem('${item._id.$oid}')">
-          Remove
-        </button>
-      </div>
-    `;
-  }).join("") + `
-    <div class="bg-gray-700 p-4 rounded-lg mt-6 flex justify-between items-center">
-      <span class="text-xl font-bold">Total:</span>
-      <span class="text-2xl text-green-400 font-bold">₹${total}</span>
-    </div>
-
-    <button onclick="goToCheckout()" 
-      class="mt-4 bg-green-500 hover:bg-green-400 text-white w-full py-3 rounded-lg text-xl font-bold">
-      Proceed to Checkout
-    </button>
-  `;
-}
-
-// ✅ Change item quantity
-function changeQty(productId, delta) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const item = cart.find(p => p._id.$oid === productId);
-  if (item) {
-    item.quantity += delta;
-    if (item.quantity <= 0) {
-      cart = cart.filter(p => p._id.$oid !== productId);
+document.addEventListener('DOMContentLoaded', () => {
+    // Simulate getting current user (replace with real auth logic)
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!currentUser) {
+        window.location.href = 'login.html';
+        return;
     }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    loadCart();
-  }
-}
 
-// ✅ Remove item from cart
-function removeItem(productId) {
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  cart = cart.filter(p => p._id.$oid !== productId);
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  loadCart();
-}
+    // Get cart from localStorage (or backend in real app)
+    let cart = JSON.parse(localStorage.getItem('cart_' + currentUser.id)) || [];
 
-// ✅ Navigate to checkout
-function goToCheckout() {
-  window.location.href = "checkout.html";
-}
+    const cartItemsDiv = document.getElementById('cart-items');
+    const cartSummaryDiv = document.getElementById('cart-summary');
+
+    if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<div class="text-center text-gray-500 text-lg">Your cart is empty.</div>';
+        cartSummaryDiv.innerHTML = '';
+        return;
+    }
+
+    // Fetch products data (simulate API call)
+    fetch('data/products.json')
+        .then(res => res.json())
+        .then(products => {
+            let total = 0;
+            cartItemsDiv.innerHTML = '';
+            cart.forEach(item => {
+                const product = products.find(p => p.id === item.productId);
+                if (product) {
+                    const itemTotal = product.price * item.quantity;
+                    total += itemTotal;
+                    cartItemsDiv.innerHTML += `
+                        <div class="product-card flex flex-col bg-white rounded-xl shadow hover:shadow-lg transition overflow-hidden">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-48 object-cover">
+                            <div class="product-info p-4 flex-1 flex flex-col justify-between">
+                                <div>
+                                    <h3 class="product-name text-lg font-bold mb-2">${product.name}</h3>
+                                    <div class="flex items-center mb-2">
+                                        <span class="product-price text-green-700 font-bold text-xl">$${product.price}</span>
+                                    </div>
+                                    <div class="text-gray-600 mb-2">Quantity: <span class="font-semibold">${item.quantity}</span></div>
+                                    <div class="text-gray-700">Total: <span class="font-semibold">$${itemTotal}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            cartSummaryDiv.innerHTML = `
+                <div class="bg-white rounded-xl shadow p-6 max-w-md mx-auto mt-8">
+                    <h2 class="text-2xl font-bold mb-4">Cart Summary</h2>
+                    <div class="flex justify-between text-lg mb-2">
+                        <span>Total:</span>
+                        <span class="font-bold text-green-700">$${total}</span>
+                    </div>
+                    <button id="checkout-btn" class="w-full mt-4 bg-yellow-400 hover:bg-yellow-500 text-white font-bold py-3 rounded-lg transition">Checkout</button>
+                </div>
+            `;
+        });
+});

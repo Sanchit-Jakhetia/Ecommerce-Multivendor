@@ -8,12 +8,14 @@
       <input type="text" name="search" id="search-bar" placeholder="Search products..." class="w-full max-w-md px-4 py-2 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-400 text-gray-900 bg-gray-100 shadow-sm" />
       <button type="submit" class="ml-2 px-4 py-2 rounded-full bg-yellow-400 hover:bg-yellow-500 text-white font-bold shadow">Search</button>
     </form>
-    <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
+    <nav class="hidden md:flex gap-6 text-gray-700 font-medium items-center">
       <a href="/frontend/index.html" class="hover:text-yellow-500">Home</a>
       <a href="/frontend/categories.html" class="hover:text-yellow-500">Categories</a>
       <a href="/frontend/cart.html" class="hover:text-yellow-500">Cart</a>
-      <a href="/frontend/login.html" class="hover:text-yellow-500">Login</a>
-      <a href="/frontend/signup.html" class="hover:text-yellow-500">Sign Up</a>
+      <span id="user-info" class="hidden text-yellow-600 font-bold"></span>
+      <button id="logout-btn" class="hidden ml-2 px-3 py-1 rounded bg-gray-200 hover:bg-yellow-400 text-gray-800 font-semibold">Logout</button>
+      <a href="/frontend/login.html" id="login-link" class="hover:text-yellow-500">Login</a>
+      <a href="/frontend/signup.html" id="signup-link" class="hover:text-yellow-500">Sign Up</a>
     </nav>
     <div class="md:hidden">
       <button id="mobile-menu-btn" class="text-2xl text-gray-700 focus:outline-none">&#9776;</button>
