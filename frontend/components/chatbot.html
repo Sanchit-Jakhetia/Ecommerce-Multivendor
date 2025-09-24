@@ -1,0 +1,119 @@
+<!-- Chatbot Container -->
+<div id="chatbot-container" class="fixed bottom-6 right-6 z-50 hidden">
+  <!-- Chat Toggle Button -->
+  <button id="chatbot-toggle" class="w-16 h-16 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center">
+    <svg id="chat-icon" class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-3.582 8-8 8a8.955 8.955 0 01-4.126-.985L3 21l2.016-6.126A8.963 8.963 0 013 12c0-4.418 3.582-8 8-8s8 3.582 8 8z"/>
+    </svg>
+    <svg id="close-icon" class="w-8 h-8 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+
+  <!-- Chat Window -->
+  <div id="chatbot-window" class="absolute bottom-20 right-0 w-80 h-96 bg-white rounded-lg shadow-2xl border border-gray-200 hidden flex flex-col overflow-hidden">
+    <!-- Chat Header -->
+    <div class="bg-blue-600 text-white p-4 flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2L3 6v6c0 5.55 3.84 9.739 9 9.899 5.16-.16 9-4.349 9-9.899V6l-7-4z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-semibold">AI Assistant</div>
+          <div class="text-xs text-blue-200">Online</div>
+        </div>
+      </div>
+      <button id="minimize-chat" class="text-blue-200 hover:text-white">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Chat Messages -->
+    <div id="chat-messages" class="flex-1 p-4 overflow-y-auto space-y-3 bg-gray-50">
+      <div class="flex items-start space-x-2">
+        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+          <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+            <path d="M10 2L3 6v6c0 5.55 3.84 9.739 9 9.899 5.16-.16 9-4.349 9-9.899V6l-7-4z"/>
+          </svg>
+        </div>
+        <div class="bg-white p-3 rounded-lg shadow-sm max-w-xs">
+          <p class="text-sm text-gray-700">Hello! I'm your AI shopping assistant. How can I help you today?</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Input -->
+    <div class="p-4 border-t border-gray-200 bg-white">
+      <div class="flex space-x-2">
+        <input 
+          type="text" 
+          id="chat-input" 
+          placeholder="Type your message..." 
+          class="flex-1 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+          maxlength="500"
+        >
+        <button 
+          id="send-message" 
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 flex items-center justify-center"
+          disabled
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+          </svg>
+        </button>
+      </div>
+      <div class="mt-2 text-xs text-gray-500 text-center">
+        Powered by Google Gemini AI
+      </div>
+    </div>
+
+    <!-- Loading Indicator -->
+    <div id="chat-loading" class="hidden absolute inset-0 bg-white bg-opacity-90 flex items-center justify-center">
+      <div class="flex space-x-1">
+        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce"></div>
+        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0.1s"></div>
+        <div class="w-2 h-2 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Responsive Styles -->
+<style>
+  @media (max-width: 640px) {
+    #chatbot-container {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    
+    #chatbot-window {
+      width: calc(100vw - 2rem);
+      max-width: 350px;
+      height: 70vh;
+      max-height: 500px;
+      bottom: 5rem;
+      right: 0;
+    }
+    
+    #chatbot-toggle {
+      width: 3.5rem;
+      height: 3.5rem;
+    }
+    
+    #chatbot-toggle svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    #chatbot-window {
+      width: calc(100vw - 1rem);
+      right: -0.5rem;
+    }
+  }
+</style>
