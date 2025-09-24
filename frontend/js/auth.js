@@ -117,14 +117,6 @@ if (loginForm) {
         });
         localStorage.removeItem("cart");
       }
-      
-      // Initialize chatbot after successful login
-      setTimeout(() => {
-        if (typeof initializeChatbot === 'function') {
-          initializeChatbot();
-        }
-      }, 100);
-      
       // Redirect based on user role
       if (user.role === "seller") {
         window.location.href = "seller-dashboard.html";
@@ -181,10 +173,6 @@ document.addEventListener("click", e => {
   if (e.target && e.target.id === "logout-btn") {
     localStorage.removeItem("currentUser");
     updateHeader();
-    // Trigger chatbot re-initialization
-    if (typeof initializeChatbot === 'function') {
-      initializeChatbot();
-    }
     window.location.reload();
   }
 });
@@ -196,19 +184,9 @@ if (logoutBtn) {
     localStorage.removeItem("currentUser");
     alert("Logged out successfully!");
     updateHeader();
-    // Trigger chatbot re-initialization
-    if (typeof initializeChatbot === 'function') {
-      initializeChatbot();
-    }
     window.location.href = "index.html";
   });
 }
 
 // Call updateHeader on page load
-document.addEventListener("DOMContentLoaded", () => {
-  updateHeader();
-  // Initialize chatbot if available
-  if (typeof initializeChatbot === 'function') {
-    initializeChatbot();
-  }
-});
+document.addEventListener("DOMContentLoaded", updateHeader);
