@@ -1,8 +1,8 @@
 // Chatbot functionality with Google Gemini API integration
 class Chatbot {
   constructor() {
-    this.apiKey = 'AIzaSyDBuhTynkSHSJ78LqN_NGQ7RHGkXDkJ9b0';
-    this.apiUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
+    this.apiKey = '';
+    this.apiUrl = '';
     this.isOpen = false;
     this.isLoading = false;
     this.conversationHistory = [];
